@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Heart, Download, Sparkles, BookOpen, Wind, Sun, Cloud, CloudRain, Zap, Frown, Smile, Meh, AlertCircle, Coffee, Music } from "lucide-react";
-import { Card, CardContent } from "@/app/components/ui/card";
-import { Button } from "@/app/components/ui/button";
-import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { Card, CardContent } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 const feelings = [
   {

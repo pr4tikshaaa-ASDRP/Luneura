@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Heart, Brain, Users, MessageCircle, BookOpen } from "lucide-react";
+import { Heart, Brain, Users, MessageCircle, BookOpen, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
@@ -37,6 +37,14 @@ const HomePage = () => {
       link: "/chatbot",
       color: "text-orange-500",
       emoji: "💬"
+    },
+    {
+      icon: Sparkles,
+      title: "Coping Skills",
+      description: "Helpful strategies for stress, overwhelm, emotions, and everyday challenges",
+      link: "/coping-skills",
+      color: "text-teal-500",
+      emoji: "✨"
     },
     {
       icon: Heart,
