@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FlaskConical, TrendingUp, ExternalLink, BarChart3, DollarSign, Users, Brain, Filter, Sparkles } from "lucide-react";
+import { FlaskConical, TrendingUp, ExternalLink, BarChart3, DollarSign, Users, Brain, Filter, Sparkles, Search } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import {
@@ -16,6 +16,7 @@ const ResearchHubPage = () => {
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [showSummaries, setShowSummaries] = useState<{ [key: number]: boolean }>({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   const statistics = [
     {
@@ -200,20 +201,48 @@ const ResearchHubPage = () => {
   ];
 
   const filteredResearch = recentResearch.filter((article) => {
-    if (selectedAgeGroup !== "all" && article.ageGroup !== "all" && article.ageGroup !== selectedAgeGroup) {
-      return false;
-    }
-    if (selectedRecency !== "all" && article.recency !== selectedRecency) {
-      return false;
-    }
-    if (selectedLevel !== "all" && article.level !== selectedLevel) {
-      return false;
-    }
-    if (selectedCategory !== "all" && article.category !== selectedCategory) {
-      return false;
-    }
-    return true;
-  });
+  const matchesSearch =
+    searchTerm === "" ||
+    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.source.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.tags.some((tag) =>
+      tag.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+  if (!matchesSearch) return false;
+
+  if (
+    selectedAgeGroup !== "all" &&
+    article.ageGroup !== "all" &&
+    article.ageGroup !== selectedAgeGroup
+  ) {
+    return false;
+  }
+
+  if (
+    selectedRecency !== "all" &&
+    article.recency !== selectedRecency
+  ) {
+    return false;
+  }
+
+  if (
+    selectedLevel !== "all" &&
+    article.level !== selectedLevel
+  ) {
+    return false;
+  }
+
+  if (
+    selectedCategory !== "all" &&
+    article.category !== selectedCategory
+  ) {
+    return false;
+  }
+
+  return true;
+});
 
   const toggleSummary = (id: number) => {
     setShowSummaries({ ...showSummaries, [id]: !showSummaries[id] });
@@ -301,11 +330,27 @@ const ResearchHubPage = () => {
             {/* Filters */}
             <Card className="border-2 mb-6">
               <CardContent className="p-6">
-                <div className="flex items-center space-x-2 mb-4">
-                  <Filter className="w-5 h-5 text-primary" />
-                  <h3 className="text-lg font-medium text-foreground">Filter Articles</h3>
-                </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="flex items-center space-x-2 mb-5">
+  <Filter className="w-5 h-5 text-primary" />
+  <h3 className="text-lg font-medium text-foreground">
+    Search & Filter Articles
+  </h3>
+</div>
+
+<div className="relative mb-8">
+  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+
+  <input
+    type="text"
+    placeholder="Search articles, topics, journals, authors, or keywords..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="w-full h-12 rounded-xl border border-primary/20 bg-background pl-12 pr-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+  />
+</div>
+
+
+<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Age Group</label>
                     <Select value={selectedAgeGroup} onValueChange={setSelectedAgeGroup}>
