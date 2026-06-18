@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { Heart, Brain, Users, MessageCircle, BookOpen } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
-import { Card, CardContent } from "@/app/components/ui/card";
-import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 const HomePage = () => {
   const features = [
@@ -54,46 +54,51 @@ const HomePage = () => {
       <section className="bg-gradient-to-b from-secondary/30 to-background py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl sm:text-5xl font-medium text-foreground leading-tight">
-                Welcome to Luneura
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                A calm, clear, and supportive space designed specifically for autistic girls of all ages.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                You're in the right place. Explore autism your way — clear, calm, and here for you.
-              </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Link to="/parent-corner">
-                  <Button size="lg" className="rounded-full">
-                    Get Started
-                  </Button>
-                </Link>
-                <Link to="/chatbot">
-                  <Button size="lg" variant="outline" className="rounded-full">
-                    Chat with Us
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-card">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1567516364473-233c4b6fcfbe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHlvdW5nJTIwZ2lybCUyMHNtaWxpbmd8ZW58MXx8fHwxNzY5MDU1OTIwfDA&ixlib=rb-4.1.0&q=80&w=1080"
-                  alt="Happy young girl"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
+  <div className="space-y-6 max-w-2xl">
+    <h1 className="text-4xl sm:text-5xl font-medium text-foreground leading-tight">
+      Welcome to Luneura
+    </h1>
+
+    <p className="text-xl text-muted-foreground leading-relaxed">
+      A calm, clear, and supportive space designed specifically for autistic girls of all ages.
+    </p>
+
+    <p className="text-lg text-muted-foreground leading-relaxed">
+      You're in the right place. Explore autism your way — clear, calm, and here for you.
+    </p>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 max-w-2xl">
+      <Link to="/parent-corner">
+        <Button size="lg" className="rounded-full w-full h-14 text-base">
+          Get Started
+        </Button>
+      </Link>
+
+      <Link to="/chatbot">
+        <Button size="lg" variant="outline" className="rounded-full w-full h-14 text-base">
+          Chat with Us
+        </Button>
+      </Link>
+    </div>
+  </div>
+
+  <div className="relative flex justify-center lg:justify-start">
+    <div className="w-full max-w-[650px] h-[380px] sm:h-[450px] rounded-3xl overflow-hidden shadow-2xl border-4 border-card">
+      <ImageWithFallback
+        src="https://images.unsplash.com/photo-1567516364473-233c4b6fcfbe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHlvdW5nJTIwZ2lybCUyMHNtaWxpbmd8ZW58MXx8fHwxNzY5MDU1OTIwfDA&ixlib=rb-4.1.0&q=80&w=1080"
+        alt="Happy young girl"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+</div>
         </div>
       </section>
 
       {/* Calming Section */}
       <section className="py-16 sm:py-20 bg-secondary/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-[1fr_0.9fr] gap-8 xl:gap-10 items-center">
             <div className="relative order-2 lg:order-1">
               <div className="aspect-video rounded-3xl overflow-hidden shadow-xl border-4 border-card">
                 <ImageWithFallback
