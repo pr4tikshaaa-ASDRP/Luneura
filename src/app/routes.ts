@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router";
-import Root from "@/app/components/Root";
-import HomePage from "@/app/pages/HomePage";
-import AgesStagesPage from "@/app/pages/AgesStagesPage";
-import ParentCornerPage from "@/app/pages/ParentCornerPage";
-import ResearchHubPage from "@/app/pages/ResearchHubPage";
-import ChatbotPage from "@/app/pages/ChatbotPage";
-import ContactPage from "@/app/pages/ContactPage";
-import MoodJournalPage from "@/app/pages/MoodJournalPage";
+import Root from "./components/Root";
+import HomePage from "./pages/HomePage";
+import AgesStagesPage from "./pages/AgesStagesPage";
+import ParentCornerPage from "./pages/ParentCornerPage";
+import ResearchHubPage from "./pages/ResearchHubPage";
+import ChatbotPage from "./pages/ChatbotPage";
+import ContactPage from "./pages/ContactPage";
+import MoodJournalPage from "./pages/MoodJournalPage";
+import CopingSkillsPage from "./pages/CopingSkillsPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: "mood-journal", Component: MoodJournalPage },
       { path: "chatbot", Component: ChatbotPage },
       { path: "contact", Component: ContactPage },
+      { path: "coping-skills", Component: CopingSkillsPage },
     ],
   },
 ]);

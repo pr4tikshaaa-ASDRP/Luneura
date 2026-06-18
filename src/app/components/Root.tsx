@@ -1,13 +1,13 @@
 import { Outlet, Link, useLocation } from "react-router";
 import { useState } from "react";
 import { Menu, X, Palette, Phone } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/app/components/ui/dropdown-menu";
+} from "./ui/dropdown-menu";
 
 const Root = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,6 +19,7 @@ const Root = () => {
     { label: "Parent Corner", path: "/parent-corner" },
     { label: "Ages & Quiz", path: "/ages-stages" },
     { label: "Research Hub", path: "/research-hub" },
+    { label: "Coping Skills", path: "/coping-skills" },
     { label: "Mood Journal", path: "/mood-journal" },
     { label: "Chatbot", path: "/chatbot" },
     { label: "Contact", path: "/contact" },
@@ -176,15 +177,15 @@ const Root = () => {
           <a
           key={line.title}
           href={line.href}
-          className="rounded-3xl border-2 border-primary/20 bg-card p-8 transition-all hover:shadow-md hover:-translate-y-1"
+          className="rounded-3xl border-2 border-primary/25 bg-card p-8 transition-all hover:shadow-md hover:-translate-y-1"
         >
-          <Phone className="h-10 w-10 text-destructive mb-8" />
+          <Phone className="h-10 w-10 text-primary mb-8" />
 
           <h3 className="text-2xl font-medium text-foreground mb-6">
             {line.title}
           </h3>
 
-          <p className="text-3xl text-destructive font-medium mb-4">
+          <p className="text-3xl text-primary font-medium mb-4">
             {line.contact}
           </p>
 

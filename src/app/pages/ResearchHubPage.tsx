@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { FlaskConical, TrendingUp, ExternalLink, BarChart3, DollarSign, Users, Brain, Filter, Sparkles } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
-import { Button } from "@/app/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Button } from "../components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/app/components/ui/select";
+} from "../components/ui/select";
 
 const ResearchHubPage = () => {
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string>("all");
