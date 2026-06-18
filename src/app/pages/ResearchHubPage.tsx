@@ -30,7 +30,7 @@ const ResearchHubPage = () => {
     {
       icon: DollarSign,
       title: "Average Diagnosis Cost",
-      value: "$1,000-$5,000",
+      value: "$1k-$5k",
       description: "Cost for comprehensive autism evaluation in the US",
       color: "text-green-500",
       bg: "bg-green-50"
@@ -38,7 +38,7 @@ const ResearchHubPage = () => {
     {
       icon: BarChart3,
       title: "Treatment Costs",
-      value: "$40,000-$60,000/year",
+      value: "$40K-$60K",
       description: "Average annual cost for intensive behavioral therapy and support",
       color: "text-blue-500",
       bg: "bg-blue-50"
