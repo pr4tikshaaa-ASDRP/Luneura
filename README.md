@@ -5,6 +5,8 @@
 
   ## Running the code
 
+  Must install Node.js prior to running commands. (nodejs.org, LTS version)
+  
   Run `npm i` to install the dependencies.
 
   Run `npm run dev` to start the development server.
