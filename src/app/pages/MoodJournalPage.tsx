@@ -328,8 +328,8 @@ const MoodJournalPage = () => {
       </section>
 
       {/* Journal tips */}
-      <section className="py-12 bg-secondary/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-secondary/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 space-y-2">
             <h2 className="text-2xl font-medium text-foreground">Tips for Journaling</h2>
             <p className="text-muted-foreground">A few gentle reminders as you begin your journaling practice</p>
@@ -340,8 +340,8 @@ const MoodJournalPage = () => {
               { icon: Heart, title: "Be kind to yourself", body: "Your feelings are valid, all of them. Journaling is a judgment-free space just for you." },
               { icon: Wind, title: "Go at your own pace", body: "You don't have to journal every day. Even once a week can make a difference." },
             ].map(({ icon: Icon, title, body }) => (
-              <Card key={title} className="border-2">
-                <CardContent className="p-6 space-y-3">
+              <Card key={title} className="border-2 h-full">
+                <CardContent className="p-8 space-y-4 h-full">
                   <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center">
                     <Icon className="w-5 h-5 text-primary" />
                   </div>
