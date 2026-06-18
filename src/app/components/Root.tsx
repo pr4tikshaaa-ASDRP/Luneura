@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from "react-router";
 import { useState } from "react";
-import { Menu, X, Palette } from "lucide-react";
+import { Menu, X, Palette, Phone } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import {
   DropdownMenu,
@@ -30,7 +30,26 @@ const Root = () => {
     { value: "blue", label: "Soft Blue", color: "#7ba3c7" },
     { value: "peach", label: "Soft Peach", color: "#d4a89a" },
   ];
-
+  const crisisLines = [
+    {
+    title: "988 Suicide & Crisis Lifeline",
+    contact: "988",
+    description: "24/7 crisis support for anyone in distress",
+    href: "tel:988",
+    },
+    {
+    title: "Crisis Text Line",
+    contact: "Text HOME to 741741",
+    description: "Free 24/7 text support for people in crisis",
+    href: "sms:741741",
+    },
+    {
+    title: "Autism Response Team (Autism Speaks)",
+    contact: "888-288-4762",
+    description: "Information and resources for autism-related questions",
+    href: "tel:8882884762",
+    },
+  ];
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme);
     if (newTheme === "lavender") {
@@ -146,7 +165,37 @@ const Root = () => {
       <main className="flex-1">
         <Outlet />
       </main>
+      <section className="py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-medium text-foreground mb-10">
+          Crisis Support & Hotlines
+          </h2>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {crisisLines.map((line) => (
+          <a
+          key={line.title}
+          href={line.href}
+          className="rounded-3xl border-2 border-primary/20 bg-card p-8 transition-all hover:shadow-md hover:-translate-y-1"
+        >
+          <Phone className="h-10 w-10 text-destructive mb-8" />
+
+          <h3 className="text-2xl font-medium text-foreground mb-6">
+            {line.title}
+          </h3>
+
+          <p className="text-3xl text-destructive font-medium mb-4">
+            {line.contact}
+          </p>
+
+          <p className="text-muted-foreground text-lg">
+            {line.description}
+          </p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
       {/* Footer */}
       <footer className="bg-card border-t border-border py-8 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
