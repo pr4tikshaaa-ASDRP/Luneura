@@ -16,7 +16,6 @@ const SupportSlider = ({ areas }: { areas: typeof supportAreas }) => {
   return (
     <div className="relative">
       <div className="overflow-hidden rounded-2xl border-2 border-border bg-card">
-        {/* Adjusted to a grid layout on medium+ screens to separate text and illustration columns */}
         <div className="grid md:grid-cols-2 items-center gap-8 p-8 sm:p-10 min-h-[360px]">
           
           {/* Left Column: Text Content */}
@@ -41,7 +40,7 @@ const SupportSlider = ({ areas }: { areas: typeof supportAreas }) => {
               </ul>
             </div>
             
-            {/* Dot indicators moved beneath text area */}
+            {/* Dot indicators */}
             <div className="flex justify-start space-x-2 pt-6">
               {areas.map((_, i) => (
                 <button
@@ -92,6 +91,7 @@ const routineNodes = [
     icon: Sun,
     angle: -90,
     color: "#F5E0A0",
+    image: "/src/imports/morning_routine_illustration.png", // 👈 Add your morning image path here
     items: [
       "Use visual schedules for morning tasks",
       "Allow extra time for transitions",
@@ -106,6 +106,7 @@ const routineNodes = [
     icon: School,
     angle: 0,
     color: "#A8E0C8",
+    image: "/src/imports/school_support_illustration.png", // 👈 Add your school image path here
     items: [
       "Pack sensory tools (fidgets, headphones)",
       "Provide a safe communication method with teachers",
@@ -120,6 +121,7 @@ const routineNodes = [
     icon: Smile,
     angle: 90,
     color: "#C8B0E0",
+    image: "/src/imports/emotional_regulation_illustration.png", // 👈 Add your emotional image path here
     items: [
       "Teach emotion identification with visual aids",
       "Create a calm-down space at home",
@@ -134,6 +136,7 @@ const routineNodes = [
     icon: UserCheck,
     angle: 180,
     color: "#A8C0E0",
+    image: "/src/imports/social_situations_illustration.png", // 👈 Add your social image path here
     items: [
       "Prepare for social events in advance",
       "Provide an exit strategy from overwhelming situations",
@@ -159,7 +162,7 @@ const CircularTimeline = () => {
   const selectedNode = routineNodes.find((n) => n.id === selected) ?? null;
 
   return (
-    <div className="flex flex-col lg:flex-row items-center gap-10">
+    <div className="flex flex-col lg:flex-row items-center gap-10 max-w-5xl mx-auto">
       {/* Wheel */}
       <div className="flex-shrink-0 relative" style={{ width: SVG_SIZE, height: SVG_SIZE }}>
         <svg width={SVG_SIZE} height={SVG_SIZE} viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`} style={{ overflow: "visible" }}>
@@ -172,10 +175,27 @@ const CircularTimeline = () => {
               <line key={node.id} x1={CX} y1={CY} x2={outer.x} y2={outer.y} stroke="hsl(var(--border))" strokeWidth={1.5} />
             );
           })}
-          {/* Center circle */}
-          <circle cx={CX} cy={CY} r={46} fill="hsl(var(--primary) / 0.12)" stroke="hsl(var(--primary) / 0.4)" strokeWidth={2} />
-          <text x={CX} y={CY - 8} textAnchor="middle" fontSize={12} fontFamily="inherit" fill="hsl(var(--primary))" fontWeight="600">Daily</text>
-          <text x={CX} y={CY + 8} textAnchor="middle" fontSize={12} fontFamily="inherit" fill="hsl(var(--primary))" fontWeight="600">Routines</text>
+          
+          {/* Clip path to keep the center girl image perfectly round */}
+          <defs>
+            <clipPath id="centerCircleClip">
+              <circle cx={CX} cy={CY} r={46} />
+            </clipPath>
+          </defs>
+
+          {/* Center Girl Avatar Image Placeholder */}
+          <g>
+            <circle cx={CX} cy={CY} r={48} fill="white" stroke="hsl(var(--primary) / 0.4)" strokeWidth={2} />
+            <image 
+              href="/src/imports/center_girl_avatar.png" // 👈 Replace with your main girl face image path
+              x={CX - 46} 
+              y={CY - 46} 
+              width={92} 
+              height={92} 
+              clipPath="url(#centerCircleClip)"
+              preserveAspectRatio="xMidYMid slice"
+            />
+          </g>
         </svg>
 
         {/* Bubble nodes — positioned absolutely over the SVG */}
@@ -216,29 +236,41 @@ const CircularTimeline = () => {
         })}
       </div>
 
-      {/* Detail panel */}
-      <div className="flex-1 w-full max-w-sm min-h-[200px] flex items-center justify-center">
+      {/* Expanded Detail panel with dynamic illustration sidecar */}
+      <div className="flex-1 w-full min-h-[260px] flex items-center justify-center">
         {selectedNode ? (
-          <Card className="border-2 w-full" style={{ borderColor: selectedNode.color }}>
-            <CardContent className="p-6 space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: selectedNode.color }}>
-                  <selectedNode.icon className="w-5 h-5 text-foreground/70" />
+          <Card className="border-2 w-full overflow-hidden" style={{ borderColor: selectedNode.color }}>
+            <div className="grid md:grid-cols-5 items-center">
+              {/* Left Side: Tips Content */}
+              <CardContent className="p-6 space-y-4 md:col-span-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: selectedNode.color }}>
+                    <selectedNode.icon className="w-5 h-5 text-foreground/70" />
+                  </div>
+                  <h4 className="text-lg font-medium text-foreground">{selectedNode.label}</h4>
                 </div>
-                <h4 className="text-lg font-medium text-foreground">{selectedNode.label}</h4>
+                <ul className="space-y-2">
+                  {selectedNode.items.map((item, i) => (
+                    <li key={i} className="flex items-start space-x-3 text-muted-foreground">
+                      <Check className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
+                      <span className="leading-relaxed text-sm sm:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+
+              {/* Right Side: Specific Button Image Illustration Placeholder */}
+              <div className="p-6 bg-muted/20 h-full w-full flex items-center justify-center md:col-span-2 border-t md:border-t-0 md:border-l border-border/40">
+                <img 
+                  src={selectedNode.image} 
+                  alt={`${selectedNode.label} Illustration`}
+                  className="max-w-full h-auto max-h-[180px] object-contain rounded-lg"
+                />
               </div>
-              <ul className="space-y-2">
-                {selectedNode.items.map((item, i) => (
-                  <li key={i} className="flex items-start space-x-3 text-muted-foreground">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
-                    <span className="leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
+            </div>
           </Card>
         ) : (
-          <div className="text-center space-y-3 p-8">
+          <div className="text-center space-y-3 p-8 border-2 border-dashed border-border rounded-2xl w-full">
             <div className="w-14 h-14 rounded-full border-2 border-border flex items-center justify-center mx-auto">
               <ClipboardList className="w-6 h-6 text-muted-foreground/40" />
             </div>
@@ -314,7 +346,7 @@ const supportAreas = [
   {
     icon: Heart,
     title: "Emotional Support",
-    image: "src/imports/Gemini_Generated_Image_rbvkzgrbvkzgrbvk.png", // 👈 Make sure to match your exact file path names here
+    image: "src/imports/Gemini_Generated_Image_rbvkzgrbvkzgrbvk.png",
     items: [
       "Validate their feelings and experiences",
       "Create a judgment-free environment",
@@ -326,7 +358,7 @@ const supportAreas = [
   {
     icon: Lightbulb,
     title: "Sensory Support",
-    image: "/src/imports/Gemini_Generated_Image_weosyweosyweosyw.png", // 👈 Make sure to match your exact file path names here
+    image: "/src/imports/Gemini_Generated_Image_weosyweosyweosyw.png",
     items: [
       "Identify and minimize sensory triggers",
       "Provide quiet spaces for decompression",
@@ -338,7 +370,7 @@ const supportAreas = [
   {
     icon: Users,
     title: "Social Support",
-    image: "src/imports/Gemini_Generated_Image_n60tqon60tqon60t.png", // 👈 Make sure to match your exact file path names here
+    image: "src/imports/Gemini_Generated_Image_n60tqon60tqon60t.png",
     items: [
       "Teach social skills explicitly and concretely",
       "Help them find like-minded friends",
@@ -350,7 +382,7 @@ const supportAreas = [
   {
     icon: GraduationCap,
     title: "School Advocacy",
-    image: "src/imports/Gemini_Generated_Image_259dpa259dpa259d.png", // 👈 Make sure to match your exact file path names here
+    image: "src/imports/Gemini_Generated_Image_259dpa259dpa259d.png",
     items: [
       "Work with teachers on accommodations",
       "Consider IEP or 504 plan",
